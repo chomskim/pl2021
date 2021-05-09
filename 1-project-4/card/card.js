@@ -57,7 +57,7 @@ class Card extends Comparable {
 
   compareTo(right) {
     let lrank, rrank
-    if (rank === Card.ACE) lrank = Card.KING + 1
+    if (this.rank === Card.ACE) lrank = Card.KING + 1
     else lrank = this.rank
 
     if (right.rank === Card.ACE) rrank = Card.KING + 1

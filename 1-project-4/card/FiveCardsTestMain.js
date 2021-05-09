@@ -60,11 +60,10 @@ function suffle(list) {
     oneOrzero = Math.random() <= 0.5 ? 0 : 1
     //console.log(`ind=${ind} rand=${oneOrzero} card=${list[ind]}`)
     if (oneOrzero === 0) {
-      // move to back
+      // swap with last element
       let mov = list[ind]
-      let last = list[list.length - 1]
+      list[ind] = list[list.length - 1]
       list[list.length - 1] = mov
-      list[ind] = last
     } else {
       ind++
       ind %= lsize
