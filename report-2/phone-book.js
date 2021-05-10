@@ -42,13 +42,13 @@ class PhoneBook {
 
   static restoreDB(phoneBookName) {
     let db = localStorage.getItem(phoneBookName)
-    return db ? JSON.parse(db) : null
+    return db ? JSON.parse(db) : []
   }
 
   static initDB(phoneBookName) {
     let PHONEBOOK_DB = PhoneBook.restoreDB(phoneBookName)
     console.log(`${phoneBookName}=`, JSON.stringify(PHONEBOOK_DB))
-    if (PHONEBOOK_DB.length === null) {
+    if (PHONEBOOK_DB.length === 0) {
       let contactList = RANDOM_USERS.results.map((user) => {
         const name = `${user.name.first} ${user.name.last}`
         const email = user.email
@@ -57,7 +57,7 @@ class PhoneBook {
       })
       PHONEBOOK_DB = []
       contactList.forEach((row) => {
-        create(row)
+        PHONEBOOK_DB.push(row)
       })
     }
     return PHONEBOOK_DB

@@ -26,7 +26,7 @@ function generate5CardList(gencount) {
       deckCard.push(new Card(s, r))
     }
 
-  console.log(`deckCard=${deckCard}`)
+  //console.log(`deckCard=${deckCard}`)
   for (let i = 1; i <= gencount; i++) {
     suffle(deckCard)
     //console.log(`deckCard=${deckCard}`)
@@ -39,7 +39,7 @@ function generate5CardList(gencount) {
       fc[ipos] = deckCard[indDeck]
       indDeck++
       ipos++
-      if (ipos == 5) {
+      if (ipos === 5) {
         p5CardsList.push(new FiveCards(fc))
         ipos = 0
       }
@@ -50,8 +50,6 @@ function generate5CardList(gencount) {
 function suffle(list) {
   const SUFFLECOUNT = 100
 
-  //println "List before Suffle"
-  //printList(list);
   let oneOrzero = 0
   let lsize = list.length
   let ind = 0
@@ -61,16 +59,12 @@ function suffle(list) {
     //console.log(`ind=${ind} rand=${oneOrzero} card=${list[ind]}`)
     if (oneOrzero === 0) {
       // swap with last element
-      let mov = list[ind]
-      list[ind] = list[list.length - 1]
-      list[list.length - 1] = mov
+      ;[list[ind], list[list.length - 1]] = [list[list.length - 1], list[ind]]
     } else {
       ind++
       ind %= lsize
     }
   }
-  //println "List after Suffle"
-  //printList(list);
 }
 function printFiveCardsList(fcList) {
   fcList.forEach((fc, i) => {
@@ -83,3 +77,7 @@ function printFiveCardsList(fcList) {
 let list5card = generate5CardList(10)
 console.log('---init 5 cards list---')
 printFiveCardsList(list5card)
+console.log('---sorted---')
+printFiveCardsList(list5card.sort())
+console.log('---sorted use compareTo---')
+printFiveCardsList(list5card.sort((left, right) => left.compareTo(right)))

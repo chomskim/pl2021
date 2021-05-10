@@ -61,9 +61,7 @@ function suffle(list: Card[]) {
     //console.log(`ind=${ind} rand=${oneOrzero} card=${list[ind]}`)
     if (oneOrzero === 0) {
       // swap with last element
-      let mov = list[ind]
-      list[ind] = list[list.length - 1]
-      list[list.length - 1] = mov
+      ;[list[ind], list[list.length - 1]] = [list[list.length - 1], list[ind]]
     } else {
       ind++
       ind %= lsize
