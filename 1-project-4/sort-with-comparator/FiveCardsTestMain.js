@@ -165,7 +165,7 @@ console.log("---sorted use compareTo---")
 printFiveCardsList(list5card.sort((left, right) => left.compareTo(right)))
 
 let comp = new FiveCardsComparator()
-console.log("comp=", comp)
+// console.log("comp=", comp)
 
 console.log("---sorted use selSort---")
 printFiveCardsList(selSort(list5card, comp))
