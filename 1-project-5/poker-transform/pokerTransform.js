@@ -189,13 +189,34 @@ console.log(`rankList=${JSON.stringify(rankList)}`)
 let pairList = rankList.map(getPairs)
 console.log(`pairList=${JSON.stringify(pairList)}`)
 
+function getPairTransform(fcList) {
+  let pairList = getPairs(fcList)
+  if (pairList.length === 0) {
+    return [1, ...fcList] // no pair
+  } else if (pairList.length === 1) {
+    return [2, ...pairList, ...fcList.filter((r) => !pairList.includes(r))]
+  } else if (pairList.length === 2) {
+    // two pair or 4 cards
+    if (pairList[0] !== pairList[1]) {
+      // two pair
+      return [3, ...pairList, ...fcList.filter((r) => !pairList.includes(r))]
+    } else {
+      // 4 cards
+      return [8, pairList[0], ...fcList.filter((r) => !pairList.includes(r))]
+    }
+  }
+  return [1, ...fcList] // no pair
+}
+let pairTransformList = rankList.map(getPairTransform)
+console.log(`pairTransformList=${JSON.stringify(pairTransformList)}`)
+
 const isStraight = (list5) =>
   list5.reduce(
     (prev, curr, i) => (i === list5.length - 1 ? prev : prev && list5[i] === list5[i + 1] + 1),
     true
   )
 
-function changeAce(fcList) {
+function changeAceToOne(fcList) {
   let resList = [...fcList]
   let aceIndex = resList.indexOf(14) // has Ace
   if (aceIndex !== -1) {
@@ -204,7 +225,7 @@ function changeAce(fcList) {
   }
   return resList
 }
-function getStraightValueTop(fcList) {
+function getStraightScore(fcList) {
   // return 0 if not straight
   // return fcList[0] if straight
   // return newList[0] if has Ace and changed to 1 is straight
@@ -213,10 +234,17 @@ function getStraightValueTop(fcList) {
 
   let aceIndex = fcList.indexOf(14) // has Ace
   if (aceIndex !== -1) {
-    let newList = changeAce(fcList)
+    let newList = changeAceToOne(fcList)
     if (isStraight(newList)) return newList[0]
   }
   return 0
 }
-let straightList = rankList.map(getStraightValueTop)
-console.log(`straightList=${JSON.stringify(straightList)}`)
+let straightScoreList = rankList.map(getStraightScore)
+console.log(`straightScoreList=${JSON.stringify(straightScoreList)}`)
+
+function getStraightTransform(fcList) {
+  let topVal = getStraightScore(fcList)
+  return topVal ? [5, topVal] : []
+}
+let straightTransformList = rankList.map(getStraightTransform)
+console.log(`straightTransformList=${JSON.stringify(straightTransformList)}`)
