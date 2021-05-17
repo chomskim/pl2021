@@ -5,8 +5,7 @@ class CardComparator extends Comparator {
     super()
   }
   compare(card1, card2) {
-    //return card1.compareTo(card2)
-    return card1 - card2
+    return -card1.compareTo(card2)
   }
 }
 

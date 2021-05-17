@@ -1,7 +1,7 @@
 function getMinIndex(list, rest, comp) {
   let minInd = rest
   for (let i = rest + 1; i < list.length; ++i) {
-    if (comp.compare(list[i], list[minInd]) > 0) {
+    if (comp.compare(list[i], list[minInd]) < 0) {
       //if (list[i] < list[minInd]) { // string compare
       minInd = i
     }

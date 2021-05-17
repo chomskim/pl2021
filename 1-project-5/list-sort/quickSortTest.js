@@ -6,9 +6,10 @@ function quickSort(list, comp) {
   let high = list.filter((x) => comp(x, piv) > 0)
   return quickSort(low, comp).concat(eql).concat(quickSort(high, comp))
 }
+
 let list = [2, 4, 6, 1, 3, 5, 4]
-let comp = (x, y) => x - y
-let sorted = quickSort(list, comp)
+//let comp = (x, y) => x - y
+let sorted = quickSort(list, (x, y) => x - y)
 console.log(`sorted=${JSON.stringify(sorted)}`)
 
 function listComp(xl, yl, comp) {
@@ -42,6 +43,32 @@ let listToSort = [
   [6, 1, 2],
   [6, 13, 12],
   [6, 13, 1],
+  [6, 13, 1, 1],
 ]
 let listSorted = quickSort(listToSort, (xl, yl) => listComp(xl, yl, (x, y) => x - y))
+console.log(`listSorted=${JSON.stringify(listSorted)}`)
+
+//const lcomp = (comp) => (list1, list2) => listComp(list1, list2, comp)
+//const lcomp = (comp) => {
+//  return (list1, list2) => listComp(list1, list2, comp)
+//}
+//const lcomp = function (comp) {
+//  return (list1, list2) => listComp(list1, list2, comp)
+//}
+//function lcomp(comp) {
+//  return (list1, list2) => listComp(list1, list2, comp)
+//}
+function lcomp(comp) {
+  const func = (list1, list2) => listComp(list1, list2, comp)
+  return func
+}
+//function lcomp(comp) {
+//  return function (list1, list2) {
+//    return listComp(list1, list2, comp)
+//  }
+//}
+listSorted = quickSort(
+  listToSort,
+  lcomp((x, y) => x - y)
+)
 console.log(`listSorted=${JSON.stringify(listSorted)}`)

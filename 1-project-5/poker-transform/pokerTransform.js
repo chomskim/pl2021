@@ -2,31 +2,176 @@ const CardComparator = require('./card-comparator')
 const FiveCards = require('./fivecards')
 const selSort = require('./selSort')
 const FiveCardsComparator = require('./fivecards-comparator')
+const Card = require('../../1-project-4/sort-with-comparator/card')
 
-let [A, K, Q, J] = [14, 13, 12, 11]
+let [A, K, Q, J] = [1, 13, 12, 11]
 let cardList = [
-  [A, 2, 3, 4, 5],
-  [A, 2, 3, 4, 6],
-  [A, 2, 3, 5, 6],
-  [A, 5, 7, Q, K],
-  [A, A, 2, 3, 4],
-  [6, 8, J, K, K],
-  [7, 8, J, K, K],
-  [A, A, 2, 2, 3],
-  [Q, Q, J, K, K],
-  [9, Q, Q, K, K],
-  [A, A, A, 2, 3],
-  [Q, J, K, K, K],
-  [8, Q, K, K, K],
-  [A, A, A, 2, 2],
-  [Q, Q, K, K, K],
-  [J, J, K, K, K],
-  [A, A, A, A, 2],
-  [Q, K, K, K, K],
-  [A, K, K, K, K],
+  [
+    [1, A],
+    [2, 2],
+    [3, 3],
+    [4, 4],
+    [1, 6],
+  ],
+  [
+    [1, A],
+    [2, 2],
+    [3, 3],
+    [4, 5],
+    [1, 6],
+  ],
+  [
+    [1, A],
+    [2, 5],
+    [3, 7],
+    [4, Q],
+    [1, K],
+  ],
+  [
+    [1, A],
+    [2, A],
+    [3, 2],
+    [4, 3],
+    [1, 4],
+  ],
+  [
+    [1, 6],
+    [2, 8],
+    [3, J],
+    [4, K],
+    [1, K],
+  ],
+  [
+    [1, 7],
+    [2, 8],
+    [3, J],
+    [4, K],
+    [1, K],
+  ],
+  [
+    [1, A],
+    [2, A],
+    [3, 2],
+    [4, 2],
+    [1, 3],
+  ],
+  [
+    [1, Q],
+    [2, Q],
+    [3, J],
+    [4, K],
+    [1, K],
+  ],
+  [
+    [1, 9],
+    [1, Q],
+    [2, Q],
+    [4, K],
+    [1, K],
+  ],
+  [
+    [1, A],
+    [2, A],
+    [3, A],
+    [4, 2],
+    [1, 3],
+  ],
+  [
+    [1, Q],
+    [2, J],
+    [3, K],
+    [4, K],
+    [1, K],
+  ],
+  [
+    [1, 8],
+    [2, Q],
+    [3, K],
+    [4, K],
+    [1, K],
+  ],
+  [
+    [1, A],
+    [2, A],
+    [3, A],
+    [4, 2],
+    [1, 2],
+  ],
+  [
+    [1, Q],
+    [2, Q],
+    [3, K],
+    [4, K],
+    [1, K],
+  ],
+  [
+    [1, J],
+    [2, J],
+    [3, K],
+    [4, K],
+    [1, K],
+  ],
+  [
+    [1, A],
+    [2, A],
+    [3, A],
+    [4, A],
+    [1, 2],
+  ],
+  [
+    [1, Q],
+    [2, K],
+    [3, K],
+    [4, K],
+    [1, K],
+  ],
+  [
+    [1, A],
+    [2, K],
+    [3, K],
+    [4, K],
+    [1, K],
+  ],
+  [
+    [1, A],
+    [2, 2],
+    [3, 3],
+    [4, 4],
+    [1, 5],
+  ],
+  [
+    [1, A],
+    [1, 2],
+    [1, 3],
+    [1, 5],
+    [1, 6],
+  ],
+  [
+    [1, A],
+    [1, 2],
+    [1, 3],
+    [1, 4],
+    [1, 5],
+  ],
+  [
+    [3, 10],
+    [3, J],
+    [3, Q],
+    [3, K],
+    [3, A],
+  ],
 ]
 
-cardList = cardList.map((fc) => selSort(fc, new CardComparator()))
+cardList = cardList.map((list5) => list5.map((ca) => new Card(ca[0], ca[1])))
+console.log(`cardList=${JSON.stringify(cardList)}`)
+
+cardList = cardList.map((card5) => new FiveCards(card5))
+function printFiveCardsList(fcList) {
+  fcList.forEach((fc, i) => {
+    console.log(`${i + 1} ${fc}`)
+  })
+}
+printFiveCardsList(cardList)
 
 function getPairs(list) {
   if (list.length < 2) return []
@@ -36,6 +181,9 @@ function getPairs(list) {
   }
 }
 
-cardList = cardList.map((fc) => selSort(fc, new CardComparator()))
-let pairList = cardList.map(getPairs)
+let rankList = cardList.map((fc) =>
+  fc.fiveCards.map((ca) => (ca.rank === Card.ACE ? Card.KING + 1 : ca.rank))
+)
+console.log(`rankList=${JSON.stringify(rankList)}`)
+let pairList = rankList.map(getPairs)
 console.log(`pairList=${JSON.stringify(pairList)}`)
