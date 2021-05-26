@@ -26,7 +26,7 @@ class FiveCards extends Comparable {
     return `[${allCardString}]`
   }
   reorder() {
-    this.fiveCards = selSort(this.fiveCards, new CardComparator())
+    this.fiveCards = selSort(this.fiveCards, new CardComparator().compare)
   }
 }
 
