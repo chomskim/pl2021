@@ -70,7 +70,9 @@ function getStraightTransform(fcList) {
   return topVal ? [5, topVal] : [0]
 }
 
-function pokerTransform(fclist) {
+function pokerTransform(fiveCards) {
+  //fiveCards -- A FiveCards Instance
+  let fclist = fiveCards.fiveCards.map((ca) => (ca.rank === Card.ACE ? Card.KING + 1 : ca.rank))
   //fclist -- list of fiveCards ranks
   let pokerRankList = getPairTransform(fclist)
   let tempList = getStraightTransform(fclist)

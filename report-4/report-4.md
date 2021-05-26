@@ -25,7 +25,7 @@ K,K,K,Q,Q --> Full House(7,13,12) --> [7,13,12]
 K,K,K,J,J --> Full House(7,13,11) --> [7,13,11]
 A,A,A,A,2 --> Four Card(8,14),(2) --> [8,14,2]
 K,K,K,K,Q --> Four Card(8,13),(12) --> [8,13,12]
-K,K,K,K,A --> Four Card(8,13),(1) --> [8,13,14]
+K,K,K,K,A --> Four Card(8,13),(14) --> [8,13,14]
 A,2,3,4,5 --> Straight Flush(9),(5) --> [9,5]
 10,J,Q,K,A --> Straight Flush(9),(14) --> [9,14]
 
@@ -36,7 +36,7 @@ A,2,3,4,5 --> Straight Flush(9),(5) --> [9,5]
 pokerSort.js의 샘플 데이터 이용
 
 
-2. 현재 내림차순이나 이를 오름차순으로 수정
+2. 현재 오름차순(ASC)이나 이를 내림차순(DESC)으로 수정
 ```
 
 ### 제출 -- eclass에 자신의 report-4 folder를 zip 해서 올림

@@ -12,9 +12,7 @@ class FiveCards extends Comparable {
       this.fiveCards.push(card)
     })
     this.reorder()
-    this.rankInfo = pokerTransform(
-      this.fiveCards.map((ca) => (ca.rank === Card.ACE ? Card.KING + 1 : ca.rank))
-    )
+    this.rankInfo = pokerTransform(this)
   }
 
   compareTo(right) {

@@ -1,3 +1,5 @@
+const Card = require('./card')
+
 function getPairs(list5) {
   //list5 -- list of five ranks
   if (list5.length < 2) return []
@@ -66,7 +68,10 @@ function getStraightTransform(fcList) {
   return topVal ? [5, topVal] : [0]
 }
 
-function pokerTransform(fclist) {
+function pokerTransform(fiveCards) {
+  //fiveCards -- A FiveCards Instance
+  //console.log(fiveCards)
+  let fclist = fiveCards.fiveCards.map((ca) => (ca.rank === Card.ACE ? Card.KING + 1 : ca.rank))
   //fclist -- list of fiveCards ranks
   let pokerRankList = getPairTransform(fclist)
   let tempList = getStraightTransform(fclist)

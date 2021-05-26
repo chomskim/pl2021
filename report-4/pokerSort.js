@@ -67,7 +67,7 @@ function printFiveCardsList(fcList) {
 
 // Main
 // Test for Five Cards List
-let list5card = generate5CardList(1)
+let list5card = generate5CardList(2)
 
 // Add more sample data
 sampleList.forEach((li5) => {
@@ -77,8 +77,8 @@ sampleList.forEach((li5) => {
 console.log('---init 5 cards list---')
 printFiveCardsList(list5card)
 
-console.log('---sorted use compareTo---')
-printFiveCardsList(list5card.sort((left, right) => left.compareTo(right)))
+//console.log('---sorted use compareTo---')
+//printFiveCardsList(list5card.sort((left, right) => left.compareTo(right)))
 
 let comp = new FiveCardsComparator()
 

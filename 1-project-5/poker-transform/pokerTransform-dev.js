@@ -2,8 +2,6 @@ const FiveCards = require('./fivecards')
 const Card = require('./card')
 const sampleList = require('./fivecards-sample')
 
-//console.log(`cardList=${JSON.stringify(sampleList)}`)
-
 let cardList = sampleList.map((card5) => new FiveCards(card5))
 function printFiveCardsList(fcList) {
   fcList.forEach((fc, i) => {
@@ -11,6 +9,10 @@ function printFiveCardsList(fcList) {
   })
 }
 printFiveCardsList(cardList)
+let rankList = cardList.map((fc) =>
+  fc.fiveCards.map((ca) => (ca.rank === Card.ACE ? Card.KING + 1 : ca.rank))
+)
+console.log(`rankList=${JSON.stringify(rankList)}`)
 
 function getPairs(fcList) {
   if (fcList.length < 2) return []
@@ -19,11 +21,6 @@ function getPairs(fcList) {
     else return getPairs(fcList.slice(1, fcList.length))
   }
 }
-
-let rankList = cardList.map((fc) =>
-  fc.fiveCards.map((ca) => (ca.rank === Card.ACE ? Card.KING + 1 : ca.rank))
-)
-console.log(`rankList=${JSON.stringify(rankList)}`)
 
 let pairList = rankList.map(getPairs)
 console.log(`pairList=${JSON.stringify(pairList)}`)
@@ -88,14 +85,16 @@ function getStraightTransform(fcList) {
 let straightTransformList = rankList.map(getStraightTransform)
 console.log(`straightTransformList=${JSON.stringify(straightTransformList)}`)
 
-function pokerTransform(fclist) {
+function pokerTransform(fiveCards) {
+  //console.log(fiveCards)
+  let fclist = fiveCards.fiveCards.map((ca) => (ca.rank === Card.ACE ? Card.KING + 1 : ca.rank))
   let pokerRankList = getPairTransform(fclist)
   let tempList = getStraightTransform(fclist)
   pokerRankList = tempList[0] > pokerRankList[0] ? tempList : pokerRankList
 
   return pokerRankList
 }
-let pokerTransformList = rankList.map(pokerTransform)
+let pokerTransformList = cardList.map(pokerTransform)
 console.log(`pokerTransformList=${JSON.stringify(pokerTransformList)}`)
 
 module.exports = pokerTransform
